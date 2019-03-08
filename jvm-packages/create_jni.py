@@ -19,7 +19,8 @@ CONFIG = {
     "USE_AZURE": "OFF",
     "USE_S3": "OFF",
 
-    "USE_CUDA": "OFF",
+    "USE_CUDA": "ON",
+    "USE_NCCL": "ON",
     "JVM_BINDINGS": "ON"
 }
 
@@ -69,8 +70,10 @@ def normpath(path):
 
 if __name__ == "__main__":
     if sys.platform == "darwin":
-        # Enable of your compiler supports OpenMP.
+        # Enable if your compiler supports OpenMP.
         CONFIG["USE_OPENMP"] = "OFF"
+        CONFIG["USE_CUDA"] = "OFF"
+        CONFIG["USE_NCCL"] = "OFF"
         os.environ["JAVA_HOME"] = subprocess.check_output(
             "/usr/libexec/java_home").strip().decode()
 
